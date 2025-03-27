@@ -33,15 +33,15 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioCriado);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<Usuario> deleteUsuario(Long id){
         Usuario usuarioDeletado = service.deleteUsuario(id);
         return ResponseEntity.ok(usuarioDeletado);
     }
 
     @PostMapping("/auth")
-    public ResponseEntity<Usuario> authUsuario(AuthUsuario auth){
-        Usuario usuario = service.authUsuario(auth);
+    public ResponseEntity<AuthUsuario> authUsuario(AuthUsuario auth){
+        AuthUsuario usuario = service.authUsuario(auth);
         return ResponseEntity.ok(usuario);
     }
 

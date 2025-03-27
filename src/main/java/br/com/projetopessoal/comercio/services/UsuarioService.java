@@ -16,7 +16,7 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository repository;
 
-    public Usuario authUsuario(AuthUsuario auth){
+    public AuthUsuario authUsuario(AuthUsuario auth){
 
         Usuario usuarioEncontrado = repository.findByEmail(auth.getEmail());
 
@@ -28,7 +28,9 @@ public class UsuarioService {
             throw new RuntimeException("Senha incorreta.");
         }
 
-        return usuarioEncontrado;
+        AuthUsuario usuarioAutenticado = new AuthUsuario(usuarioEncontrado.getEmail(), usuarioEncontrado.getPassword());
+
+        return usuarioAutenticado;
     }
     
     public Usuario createUsuario(Usuario usuario){
