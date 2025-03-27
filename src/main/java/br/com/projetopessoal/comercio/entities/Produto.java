@@ -1,5 +1,7 @@
 package br.com.projetopessoal.comercio.entities;
 
+
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

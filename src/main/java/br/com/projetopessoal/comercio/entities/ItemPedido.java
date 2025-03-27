@@ -6,13 +6,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Table(name = "item_produto")
+@Table(name = "itempedido")
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class ItemProduto {
+public class ItemPedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,10 +26,23 @@ public class ItemProduto {
     @JoinColumn(name = "produto_id", nullable = false)
     private Produto produto;
 
-    @JoinColumn(nullable = false)
+    @Column(nullable = false)  
     private Integer quantidade;
 
-    @JoinColumn(nullable = false)
+    @Column(nullable = false)  
+    private Double precoUnitario;
+
+    @Column(nullable = false)  
     private Double subtotal;
 
+    
+    @PrePersist
+    @PreUpdate
+    public void updateSubtotal() {
+        this.subtotal = getTotal();
+    }
+
+    public Double getTotal() {
+        return this.precoUnitario * this.quantidade;
+    }
 }

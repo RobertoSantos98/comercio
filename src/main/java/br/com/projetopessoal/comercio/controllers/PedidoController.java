@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.projetopessoal.comercio.dtos.PedidoDTO;
 import br.com.projetopessoal.comercio.entities.Pedido;
 import br.com.projetopessoal.comercio.services.PedidoService;
 
@@ -25,8 +26,8 @@ public class PedidoController {
     }
 
     @PostMapping
-    public ResponseEntity<Pedido> creatPedido(Pedido pedido){
-        return ResponseEntity.ok(service.creatPedido(pedido));
+    public ResponseEntity<PedidoDTO> creatPedido(Pedido pedido){
+        return ResponseEntity.ok(service.createPedido(pedido));
     }
 
     @PutMapping
