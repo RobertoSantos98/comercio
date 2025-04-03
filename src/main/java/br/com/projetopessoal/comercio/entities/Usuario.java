@@ -20,11 +20,18 @@ import lombok.Setter;
 @Setter
 public class Usuario {
 
+    public Usuario(String string, String string2, String string3, String string4) {
+        this.nome = string;
+        this.email = string2;
+        this.password = string3;
+        this.role = Role.valueOf(string4);
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 100, unique = true)
+    @Column(nullable = false, length = 100)
     private String nome;
 
     @Column(nullable = false, length = 255)
