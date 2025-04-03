@@ -1,5 +1,7 @@
 package br.com.projetopessoal.comercio.repositories;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,16 +30,27 @@ public class UsuarioServiceTest {
     @Transactional
     void AuthUsuarioSuccess() {
 
-        createUsuario();
+        createUsuarios();
 
         AuthUsuario newAuth = new AuthUsuario("teste@teste.com", "123456789");
         AuthUsuario result = service.authUsuario(newAuth);
 
         assertThat(result).isNotNull();
-        
     }
 
-    private void createUsuario () {
+    @Test
+    @DisplayName("Deve Falhar ao tentar autenticar um usuário")
+    @Transactional
+    void AuthUsuarioFail() {
+
+        createUsuarios();
+        
+        AuthUsuario newAuth = new AuthUsuario("test@teste.com", "123456789");
+
+        assertThrows(RuntimeException.class, () -> service.authUsuario(newAuth));
+    }
+
+    private void createUsuarios () {
         entityManager.persist(new Usuario( "Teste1", "teste@teste.com", "123456789", "ADMIN"));
         entityManager.persist(new Usuario( "Teste2", "teste2@teste.com", "987654321", "FUNCIONARIO"));
         entityManager.persist(new Usuario( "Teste3", "teste3@teste.com", "123456789", "ADMIN"));
